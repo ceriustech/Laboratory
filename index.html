@@ -19,13 +19,20 @@
 
             // put your implementation here ;
 
-
+            // Custom element class object
             class CustomKnob extends HTMLElement {
                 constructor() {
                     super();
 
+                    // HTML that will be injected into the DOM
                     this.knob = html`
-                        <div>
+                        <section>
+                        <h1>Change The Knob</h1>
+                        <div class="custom-knob">
+                            <select  @on:change=${this.updateKnob('empty')}>
+                                <option value="OFF">OFF</option>
+                                <option value="ON">ON</option>
+                            </select>
                             <div  @on:mousedown=${this.updateKnob('empty')}>
                                 <svg viewBox="0 0 128 128" width="128" height="128" preserveAspectRatio="none" style="pointer-events: none; box-sizing: border-box; margin: 0px; padding: 0px; overflow: hidden; user-select: none; width: 100px; height: 100px; background-color: #111;">
                                     <circle cx="64" cy="64" r="34" fill="#404040" stroke="rgba(0,0,0,0.3)" stroke-width="8" style="pointer-events: none;" viewBox="0 0 undefined undefined"></circle>
@@ -34,15 +41,18 @@
                                     <path d="M38.13744889913117 99.59674775249769 L40.488589908301066 96.36067977499789 M32.8873016277919 95.11269837220809 L35.71572875253809 92.2842712474619 M28.40325224750231 89.86255110086881 L31.639320225002095 87.51141009169892 M24.795712935711805 83.97558198854006 L28.359739032465278 82.15961998958187 M22.15351328301324 77.59674775249768 L25.957739348193854 76.36067977499789 M20.54171301381394 70.88311646177014 L24.492466376194486 70.25737860160923 M20 63.99999999999999 L24 63.99999999999999 M20.54171301381394 57.116883538229835 L24.492466376194493 57.74262139839076 M22.153513283013247 50.40325224750231 L25.95773934819386 51.639320225002095 M24.79571293571182 44.024418011459936 L28.359739032465285 45.84038001041812 M28.403252247502316 38.13744889913117 L31.63932022500211 40.488589908301066 M32.88730162779191 32.8873016277919 L35.7157287525381 35.71572875253809 M38.137448899131186 28.40325224750231 L40.48858990830108 31.639320225002102 M44.02441801145994 24.795712935711812 L45.84038001041813 28.359739032465285 M50.40325224750232 22.15351328301324 L51.63932022500211 25.957739348193854 M57.11688353822985 20.54171301381394 L57.74262139839077 24.492466376194486 M64 20 L64 24 M70.88311646177016 20.54171301381394 L70.25737860160923 24.492466376194493 M77.59674775249769 22.153513283013247 L76.3606797749979 25.95773934819386 M83.97558198854006 24.79571293571182 L82.15961998958187 28.359739032465285 M89.86255110086883 28.403252247502316 L87.51141009169893 31.63932022500211 M95.11269837220809 32.88730162779191 L92.2842712474619 35.7157287525381 M99.59674775249769 38.137448899131186 L96.36067977499789 40.48858990830108 M103.2042870642882 44.02441801145994 L99.64026096753472 45.84038001041813 M105.84648671698676 50.403252247502316 L102.04226065180615 51.63932022500211 M107.45828698618607 57.11688353822984 L103.50753362380551 57.74262139839077 M108 64 L104 64 M107.45828698618607 70.88311646177016 L103.50753362380551 70.25737860160923 M105.84648671698676 77.59674775249769 L102.04226065180615 76.36067977499789 M103.20428706428818 83.97558198854006 L99.64026096753472 82.15961998958187 M99.59674775249769 89.86255110086881 L96.36067977499789 87.51141009169893 M95.11269837220809 95.11269837220809 L92.2842712474619 92.2842712474619 M89.86255110086881 99.59674775249769 L87.51141009169893 96.36067977499789 " stroke="#D4B87B" stroke-width="2" fill="none" stroke-linecap="round" stroke-opacity="0.5" style="pointer-events: none;"></path>
                                 </svg>
                             </div>
-                            <select  @on:change=${this.updateKnob('empty')}>
-                                <option value="OFF">OFF</option>
-                                <option value="ON">ON</option>
-                            </select>
                         </div>
+                        </section>
                     `
                    
                     this.knobFilled = html`
-                        <div>
+                        <section>
+                            <h1>Change The Knob</h1>
+                        <div class="custom-knob">
+                            <select  @on:change=${this.updateKnob('filled')}>
+                                <option value="OFF">OFF</option>
+                                <option value="ON">ON</option>
+                            </select>
                             <div  @on:mouseup=${this.updateKnob('filled')}>
                                 <svg viewBox="0 0 128 128" width="128" height="128" preserveAspectRatio="none" style="pointer-events: none; box-sizing: border-box; margin: 0px; padding: 0px; overflow: hidden; user-select: none; width: 100px; height: 100px; background-color: #111;">
                                     <circle cx="64" cy="64" r="34" fill="#308AFF" stroke="rgba(0,0,0,0.3)" stroke-width="8" style="pointer-events: none;" viewBox="0 0 undefined undefined"></circle>
@@ -51,55 +61,38 @@
                                     <path d="M38.13744889913117 99.59674775249769 L40.488589908301066 96.36067977499789 M32.8873016277919 95.11269837220809 L35.71572875253809 92.2842712474619 M28.40325224750231 89.86255110086881 L31.639320225002095 87.51141009169892 M24.795712935711805 83.97558198854006 L28.359739032465278 82.15961998958187 M22.15351328301324 77.59674775249768 L25.957739348193854 76.36067977499789 M20.54171301381394 70.88311646177014 L24.492466376194486 70.25737860160923 M20 63.99999999999999 L24 63.99999999999999 M20.54171301381394 57.116883538229835 L24.492466376194493 57.74262139839076 M22.153513283013247 50.40325224750231 L25.95773934819386 51.639320225002095 M24.79571293571182 44.024418011459936 L28.359739032465285 45.84038001041812 M28.403252247502316 38.13744889913117 L31.63932022500211 40.488589908301066 M32.88730162779191 32.8873016277919 L35.7157287525381 35.71572875253809 M38.137448899131186 28.40325224750231 L40.48858990830108 31.639320225002102 M44.02441801145994 24.795712935711812 L45.84038001041813 28.359739032465285 M50.40325224750232 22.15351328301324 L51.63932022500211 25.957739348193854 M57.11688353822985 20.54171301381394 L57.74262139839077 24.492466376194486 M64 20 L64 24 M70.88311646177016 20.54171301381394 L70.25737860160923 24.492466376194493 M77.59674775249769 22.153513283013247 L76.3606797749979 25.95773934819386 M83.97558198854006 24.79571293571182 L82.15961998958187 28.359739032465285 M89.86255110086883 28.403252247502316 L87.51141009169893 31.63932022500211 M95.11269837220809 32.88730162779191 L92.2842712474619 35.7157287525381 M99.59674775249769 38.137448899131186 L96.36067977499789 40.48858990830108 M103.2042870642882 44.02441801145994 L99.64026096753472 45.84038001041813 M105.84648671698676 50.403252247502316 L102.04226065180615 51.63932022500211 M107.45828698618607 57.11688353822984 L103.50753362380551 57.74262139839077 M108 64 L104 64 M107.45828698618607 70.88311646177016 L103.50753362380551 70.25737860160923 M105.84648671698676 77.59674775249769 L102.04226065180615 76.36067977499789 M103.20428706428818 83.97558198854006 L99.64026096753472 82.15961998958187 M99.59674775249769 89.86255110086881 L96.36067977499789 87.51141009169893 M95.11269837220809 95.11269837220809 L92.2842712474619 92.2842712474619 M89.86255110086881 99.59674775249769 L87.51141009169893 96.36067977499789 " stroke="#D4B87B" stroke-width="2" fill="none" stroke-linecap="round" stroke-opacity="0.5" style="pointer-events: none;"></path>
                                 </svg>
                             </div>
-                            <select  @on:change=${this.updateKnob('filled')}>
-                                <option value="OFF">OFF</option>
-                                <option value="ON">ON</option>
-                            </select>
                         </div>
+                        </section>
                     `;
 
                     html.update(this, this.knob);
                 }
 
                 
-
+                // This function will change the state of the SVG depending on the string that is passed via an onchange event on the element it's passed to  
                 updateKnob = (type) => (e) => {
-                    console.log('Drag works!!!', e.target)
                     if (type === 'empty') {
+                        console.log('KNOB VALUE HAS CHANGED TO ON! new value:', e.target);
                         html.update(this.knob, this.knobFilled)
                     } else {
+                        console.log('KNOB VALUE HAS CHANGED TO OFF!:', e.target);
                         html.update(this.knobFilled, this.knob)
                     }
                 }
 
             }
 
+            // Custom element class object
             class GridArea extends HTMLElement {
                 constructor() {
                     super();
                 }
             }
 
+            // This defines the custom HTML element that will be used on the web page
             window.customElements.define('custom-knob', CustomKnob);
             window.customElements.define('grid-area', GridArea);
 
-
-        </script>
-
-
-        <script type="module">
-            const knob = document.querySelector('custom-knob');
-
-            // listen for changes to the knob component's value
-
-            console.log(knob)
-
-            knob.addEventListener('input', function (ev) {
-
-                // this should fire when your implementation is working.
-
-                console.log('knob value changed! new value:', ev.detail.value);
-            });
 
         </script>
 
