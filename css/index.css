@@ -34,3 +34,17 @@ select {
 select option {
   padding: 5px;
 }
+
+.status {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.off {
+  color: red;
+}
+
+.on {
+  color: green;
+}

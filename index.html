@@ -17,7 +17,7 @@
         <script type="module">
             import html from 'https://cdn.skypack.dev/snabby@4';
 
-            // put your implementation here ;
+            // put your implementation here 
 
             // Custom element class object
             class CustomKnob extends HTMLElement {
@@ -42,6 +42,7 @@
                                 </svg>
                             </div>
                         </div>
+                        <div class="status off"><p>Knob is off.</p></div>
                         </section>
                     `
                    
@@ -62,6 +63,7 @@
                                 </svg>
                             </div>
                         </div>
+                        <div class="status on"><p>Knob is on.</p></div>
                         </section>
                     `;
 
@@ -72,7 +74,7 @@
                 // This function will change the state of the SVG depending on the string that is passed via an onchange event on the element it's passed to  
                 updateKnob = (type) => (e) => {
                     if (type === 'empty') {
-                        console.log('KNOB VALUE HAS CHANGED TO ON! new value:', e.target);
+                        console.log('KNOB VALUE HAS CHANGED TO ON!:', e.target);
                         html.update(this.knob, this.knobFilled)
                     } else {
                         console.log('KNOB VALUE HAS CHANGED TO OFF!:', e.target);
